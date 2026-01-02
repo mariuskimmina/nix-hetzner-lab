@@ -18,6 +18,15 @@
   };
   services.openssh.enable = true;
 
+  virtualisation = {
+    containers.enable = true;
+    podman = {
+      enable = true;
+      dockerCompat = true;
+      defaultNetwork.settings.dns_enabled = true; # Required for containers under podman-compose to be able to talk to each other.
+    };
+  };
+
   environment.systemPackages = map lib.lowPrio [
     pkgs.curl
     pkgs.gitMinimal
@@ -28,6 +37,12 @@
   [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFuC5sHe8hegmrgEKntLTArMn/O6m8IOKHxtgAsHHcF1 mar.kimmina@gmail.com"
   ];
+
+  users.users.root = {
+    extraGroups = [
+      "podman"
+    ];
+  };
 
   system.stateVersion = "24.05";
 }
