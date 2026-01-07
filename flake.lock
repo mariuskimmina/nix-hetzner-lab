@@ -41,11 +41,11 @@
     "homepage": {
       "flake": false,
       "locked": {
-        "lastModified": 1767816281,
-        "narHash": "sha256-RUm8cfpypCakOrZYduj/FMczcBxwSNHJGzUIR1+xgAY=",
+        "lastModified": 1767817604,
+        "narHash": "sha256-OWrXSitmdtEv32iFgQdCUCjk+aieml7q3bHUztrr8Ig=",
         "owner": "mariuskimmina",
         "repo": "homepage",
-        "rev": "bd88f94bae2c4e900525144ac69bf28916e6536e",
+        "rev": "61ef446032db5eceec8948aca1459e1bd9fab53e",
         "type": "github"
       },
       "original": {
