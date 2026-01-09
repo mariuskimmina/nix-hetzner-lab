@@ -23,11 +23,11 @@
     "homepage": {
       "flake": false,
       "locked": {
-        "lastModified": 1767972277,
-        "narHash": "sha256-9gIrV8/NWKFFjXclWk6wUShzLUD/W5dyBBcmYUuhNQM=",
+        "lastModified": 1767974634,
+        "narHash": "sha256-r8jzMDs3cIHQT8j2tyzn+FuQYv6JWMLz7lyEyY5JWfI=",
         "owner": "mariuskimmina",
         "repo": "homepage",
-        "rev": "30164b78d1814a882d094669eaed65987fe7ac20",
+        "rev": "058a57fb28eedb57ef330e8f66f1d7d696db1f28",
         "type": "github"
       },
       "original": {
