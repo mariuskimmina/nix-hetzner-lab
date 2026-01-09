@@ -7,20 +7,18 @@
     url = "github:mariuskimmina/homepage";
     flake = false;
   };
-  inputs.leaflet-hugo-sync.url = "github:mariuskimmina/leaflet-hugo-sync";
 
   outputs =
     {
       nixpkgs,
       disko,
       homepage,
-      leaflet-hugo-sync,
       ...
     }:
     {
       nixosConfigurations.hetzner-lab = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = { inherit homepage leaflet-hugo-sync; };
+        specialArgs = { inherit homepage; };
         modules = [
           disko.nixosModules.disko
           ./configuration.nix

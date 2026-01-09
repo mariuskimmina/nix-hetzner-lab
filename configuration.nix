@@ -3,12 +3,8 @@
   lib,
   pkgs,
   homepage,
-  leaflet-hugo-sync,
   ...
 }:
-let
-  leaflet-sync-bin = leaflet-hugo-sync.packages.x86_64-linux.default;
-in
 {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
@@ -46,40 +42,28 @@ in
     extraGroups = [ "podman" ];
   };
 
-  # Homepage build service
+  # Build hugo site as a derivation
   systemd.services.homepage-build = {
-    description = "Build homepage with leaflet-sync";
-    after = [ "network-online.target" ];
-    wants = [ "network-online.target" ];
+    description = "Build homepage";
     wantedBy = [ "multi-user.target" ];
 
     serviceConfig = {
       Type = "oneshot";
       RemainAfterExit = true;
-      StateDirectory = "homepage";
     };
-
-    path = [ pkgs.hugo leaflet-sync-bin ];
 
     script = ''
       set -ex
-      
-      WORK_DIR=/var/lib/homepage
+      WORK_DIR=$(mktemp -d)
       OUT_DIR=/var/www/homepage
       
-      # Copy source from nix store to writable directory (including hidden files)
-      rm -rf $WORK_DIR/*
-      rm -rf $WORK_DIR/.*  2>/dev/null || true
       cp -r ${homepage}/. $WORK_DIR/
       chmod -R u+w $WORK_DIR
       cd $WORK_DIR
       
-      # Run leaflet-sync (fetches from network)
-      leaflet-hugo-sync
+      ${pkgs.hugo}/bin/hugo --minify --destination $OUT_DIR
       
-      # Build hugo site
-      mkdir -p $OUT_DIR
-      hugo --minify --destination $OUT_DIR
+      rm -rf $WORK_DIR
     '';
   };
 
